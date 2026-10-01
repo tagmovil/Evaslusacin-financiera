@@ -1,0 +1,237 @@
+/* ============================================================================
+   style.css — Tema de la aplicación (se importa DESPUÉS de Bootstrap).
+   ----------------------------------------------------------------------------
+   Bootstrap 5 aporta el layout responsive (rejilla .row/.col-*, utilidades
+   flex/gap, .table-responsive, .form-control, .btn). Aquí solo se pinta la
+   identidad visual: paleta, cabecera, paneles, tarjetas, avisos y gráficas SVG.
+   El tema claro se activa con la clase `tema-claro` en <html>, que además
+   cambia `data-bs-theme` para que los componentes de Bootstrap acompañen.
+   ============================================================================ */
+
+/* --- 1) Paleta ------------------------------------------------------------- */
+:root {
+  --bg: #0f172a;
+  --panel: #1e293b;
+  --border: #334155;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --accent: #38bdf8;
+  --accent-dark: #0ea5e9;
+  --error: #f87171;
+  --ok: #4ade80;
+  --amber: #fbbf24;
+  --barra: #0b1220;
+}
+
+:root.tema-claro {
+  --bg: #f3f6f5;
+  --panel: #ffffff;
+  --border: #dde4e6;
+  --text: #16222e;
+  --muted: #57697a;
+  --accent: #0e8e77;
+  --accent-dark: #0b6c59;
+  --error: #c4502f;
+  --ok: #0b6c59;
+  --amber: #8a6011;
+  --barra: #173654;
+  color-scheme: light;
+}
+
+:root:not(.tema-claro) {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  line-height: 1.5;
+}
+
+#app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+h2,
+h3 {
+  margin-top: 0;
+}
+
+.intro {
+  color: var(--muted);
+  margin-top: 4px;
+  margin-bottom: 0;
+}
+
+/* --- 2) Esqueleto: cabecera, contenido y pie -------------------------------- */
+.cabecera {
+  padding: 14px 0;
+  background: var(--barra);
+  border-bottom: 1px solid var(--border);
+}
+
+.cabecera-titulo {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.cabecera-sub {
+  margin: 2px 0 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.contenido {
+  flex: 1;
+  padding: 18px 0 36px;
+}
+
+.pie {
+  padding: 12px 0;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.82rem;
+  text-align: center;
+}
+
+/* --- 3) Paneles: entradas y resultados ------------------------------------- */
+.formulario,
+.resultado {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 18px 20px;
+}
+
+.formulario h3,
+.resultado h3 {
+  margin: 0 0 10px;
+  color: var(--accent);
+  font-size: 1.05rem;
+}
+
+/* Etiquetas: Bootstrap ya pone el color del tema, aquí solo el peso. */
+label {
+  font-size: 0.9rem;
+  margin-bottom: 4px;
+}
+
+/* --- 4) Avisos -------------------------------------------------------------- */
+.error,
+.aviso {
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+.error {
+  background: rgba(248, 113, 113, 0.12);
+  border: 1px solid var(--error);
+  color: var(--error);
+}
+
+.aviso {
+  margin: 10px 0 0;
+  padding: 12px 16px;
+  background: rgba(251, 191, 36, 0.12);
+  border: 1px solid var(--amber);
+  color: var(--amber);
+}
+
+/* --- 5) Tarjetas (CMPC) ----------------------------------------------------- */
+.tarjetas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.tarjeta {
+  flex: 1;
+  min-width: 150px;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px 16px;
+  gap: 4px;
+}
+
+.tarjeta-valor {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--ok);
+  overflow-wrap: anywhere;
+}
+
+.tarjeta-etiqueta {
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+/* --- 6) Tablas -------------------------------------------------------------- */
+.tabla-nota {
+  margin: 12px 0 0;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.tabla-nota strong {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+table {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  --bs-table-bg: transparent;
+  --bs-table-color: var(--text);
+  --bs-table-border-color: var(--border);
+  --bs-table-striped-color: var(--text);
+  --bs-table-striped-bg: rgba(148, 163, 184, 0.06);
+}
+
+thead th {
+  color: var(--muted);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* En tema claro la cabecera de tabla necesita un fondo propio para destaca. */
+:root.tema-claro thead th {
+  background: #eef3f4;
+}
+
+.pos {
+  color: var(--ok);
+}
+
+.neg {
+  color: var(--error);
+}
+
+/* --- 7) Impresión ----------------------------------------------------------- */
+@media print {
+  .cabecera,
+  .pie {
+    display: none;
+  }
+
+  .formulario,
+  .resultado {
+    break-inside: avoid;
+    border-color: #999;
+  }
+}
